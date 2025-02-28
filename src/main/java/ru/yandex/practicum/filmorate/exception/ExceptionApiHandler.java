@@ -13,7 +13,7 @@ public class ExceptionApiHandler {
 
     @ExceptionHandler(DuplicateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse DuplicateException(final DuplicateException e) {
+    public ErrorResponse duplicateException(final DuplicateException e) {
         log.warn("Попытка добавить дубликат фильма: {}", e.getMessage(), e);
         return new ErrorResponse(
                 String.format("Фильм с id: %d уже существует", e.getId()),
@@ -22,7 +22,7 @@ public class ExceptionApiHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse NotFoundException(final NotFoundException e) {
+    public ErrorResponse notFoundException(final NotFoundException e) {
         log.warn("Объект не найден: {}", e.getMessage(), e);
         return new ErrorResponse("Объект не найден",
                 "Проверьте запрос");
@@ -30,7 +30,7 @@ public class ExceptionApiHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse InternalServerException(Exception exception) {
+    public ErrorResponse internalServerException(Exception exception) {
 
         log.error("Внутренняя ошибка сервера: {}", exception.getMessage(), exception);
 
@@ -41,7 +41,7 @@ public class ExceptionApiHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse HandleValidationException(MethodArgumentNotValidException ex) {
+    public ErrorResponse handleValidationException(MethodArgumentNotValidException ex) {
         return new ErrorResponse(
                 "Validation failed",
                 "неправильно введены данные");
