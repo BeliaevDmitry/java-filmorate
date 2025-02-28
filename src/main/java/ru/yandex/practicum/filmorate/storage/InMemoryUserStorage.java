@@ -23,7 +23,7 @@ public class InMemoryUserStorage {
 
     public void createUser(User user) {
         if (userStorage.containsKey(user.getId())) {
-            throw new DuplicateException(String.format("Пользователь с id: %d уже существует", user.getId()));
+            throw new DuplicateException(String.format("Пользователь с id: %d уже существует", user.getId()) , user.getId());
         } else {
             user.setId(++id);
             userStorage.put(id, user);
@@ -38,4 +38,8 @@ public class InMemoryUserStorage {
         }
     }
 
+    public User getUserToId(Long userId) {
+        if (userStorage.get(userId) == null) throw new NotFoundException("Пользователя с id: " + userId + " нет");
+        return userStorage.get(userId);
+    }
 }
