@@ -23,7 +23,7 @@ public class InMemoryFilmStorage {
 
     public void addFilm(Film film) {
         if (filmStorage.containsKey(film.getId())) {
-            throw new DuplicateException(String.format("Фильм с id: %d уже существует", film.getId()));
+            throw new DuplicateException(String.format("Фильм с id: %d уже существует", film.getId()), film.getId());
         } else {
             film.setId(++id);
             filmStorage.put(id, film);
@@ -38,4 +38,8 @@ public class InMemoryFilmStorage {
         }
     }
 
+    public Film getFilmToId(Long filmId) {
+        if (filmStorage.get(filmId) == null) throw new NotFoundException("Фильма с id: " + filmId + " нет");
+        return filmStorage.get(filmId);
+    }
 }
