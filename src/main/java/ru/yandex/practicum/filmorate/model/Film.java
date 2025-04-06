@@ -9,6 +9,7 @@ import ru.yandex.practicum.filmorate.validators.CustomReleaseDateMin;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 
 @Data
@@ -27,6 +28,9 @@ public class Film {
 
     @Positive
     private Integer duration;
+
+    private Mpa mpa;
+    private List<Genre> genres;
 
     public int getAmountLikes() {
         return likeId.size();
